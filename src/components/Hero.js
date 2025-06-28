@@ -1,6 +1,53 @@
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3,
+      delayChildren: 0.2
+    }
+  }
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 1,
+      ease: [0.6, -0.05, 0.01, 0.99]
+    }
+  }
+}
+
+const titleVariants = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 1.2,
+      ease: [0.6, -0.05, 0.01, 0.99]
+    }
+  }
+}
+
+const floatingVariants = {
+  animate: {
+    y: [-30, 30, -30],
+    rotate: [0, 10, -10, 0],
+    transition: {
+      duration: 8,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  }
+}
+
 export default function Hero() {
   const [text, setText] = useState('')
   const fullText = "Hi there! I'm Janvii."
@@ -13,7 +60,7 @@ export default function Hero() {
       if (index > fullText.length) {
         clearInterval(timer)
       }
-    }, 100)
+    }, 150)
     
     return () => clearInterval(timer)
   }, [])
@@ -21,65 +68,205 @@ export default function Hero() {
   return (
     <section id="home" className="hero">
       <div className="container">
-        <div className="hero-content">
+        <motion.div 
+          className="hero-content"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           <motion.h1 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
+            variants={titleVariants}
+            className="hero-title"
           >
-            {text}
             <motion.span
-              animate={{ opacity: [1, 0, 1] }}
-              transition={{ duration: 1, repeat: Infinity }}
-              style={{ color: '#8b5cf6' }}
+              initial={{ opacity: 0, rotateX: -90 }}
+              animate={{ opacity: 1, rotateX: 0 }}
+              transition={{ delay: 0.5, duration: 1, ease: "backOut" }}
+            >
+              {text}
+            </motion.span>
+            <motion.span
+              animate={{ 
+                opacity: [1, 0, 1],
+                scale: [1, 1.2, 1]
+              }}
+              transition={{ 
+                duration: 1.5, 
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              style={{ 
+                color: '#8b5cf6',
+                textShadow: '0 0 20px rgba(139, 92, 246, 0.8)'
+              }}
             >
               |
             </motion.span>
           </motion.h1>
           
           <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
+            variants={itemVariants}
+            className="hero-subtitle"
+            style={{
+              fontSize: '1.5rem',
+              marginBottom: '1.5rem',
+              background: 'linear-gradient(135deg, #ffffff 0%, #a855f7 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
+            }}
           >
             A passionate computer science undergrad creating exciting projects and having fun along the way 🚀
           </motion.p>
 
           <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9, duration: 0.8 }}
-            style={{ fontSize: '1.125rem', color: 'rgba(255,255,255,0.6)', maxWidth: '600px', margin: '1rem auto' }}
+            variants={itemVariants}
+            style={{ 
+              fontSize: '1.25rem', 
+              color: 'rgba(255,255,255,0.8)', 
+              maxWidth: '700px', 
+              margin: '0 auto 3rem',
+              lineHeight: '1.7'
+            }}
           >
-            Passionate about <span style={{ color: '#8b5cf6', fontWeight: '600' }}>Generative AI</span>, 
-            <span style={{ color: '#3b82f6', fontWeight: '600' }}> Machine Learning</span>, and 
-            <span style={{ color: '#22c55e', fontWeight: '600' }}> building intelligent tools</span>
+            Passionate about{' '}
+            <motion.span 
+              style={{ color: '#8b5cf6', fontWeight: '700' }}
+              whileHover={{ scale: 1.1, textShadow: '0 0 20px rgba(139, 92, 246, 0.8)' }}
+            >
+              Generative AI
+            </motion.span>, {' '}
+            <motion.span 
+              style={{ color: '#ec4899', fontWeight: '700' }}
+              whileHover={{ scale: 1.1, textShadow: '0 0 20px rgba(236, 72, 153, 0.8)' }}
+            >
+              Machine Learning
+            </motion.span>, and {' '}
+            <motion.span 
+              style={{ color: '#22c55e', fontWeight: '700' }}
+              whileHover={{ scale: 1.1, textShadow: '0 0 20px rgba(34, 197, 94, 0.8)' }}
+            >
+              building intelligent tools
+            </motion.span>
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2, duration: 0.8 }}
+            variants={itemVariants}
             className="hero-buttons"
           >
             <motion.a
               href="#projects"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
               className="btn btn-primary"
+              whileHover={{ 
+                scale: 1.08,
+                boxShadow: "0 25px 50px rgba(139, 92, 246, 0.5)",
+                y: -5
+              }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
-              View My Work
+              <motion.span
+                initial={{ x: 0 }}
+                whileHover={{ x: 5 }}
+                transition={{ duration: 0.2 }}
+              >
+                View My Work →
+              </motion.span>
             </motion.a>
+            
             <motion.a
               href="#contact"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
               className="btn btn-secondary"
+              whileHover={{ 
+                scale: 1.08,
+                borderColor: "rgba(139, 92, 246, 1)",
+                boxShadow: "0 25px 50px rgba(139, 92, 246, 0.3)",
+                y: -5
+              }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
-              Get In Touch
+              <motion.span
+                initial={{ x: 0 }}
+                whileHover={{ x: 5 }}
+                transition={{ duration: 0.2 }}
+              >
+                Get In Touch →
+              </motion.span>
             </motion.a>
           </motion.div>
-        </div>
+
+          {/* Animated floating elements */}
+          <motion.div
+            variants={floatingVariants}
+            animate="animate"
+            style={{
+              position: 'absolute',
+              top: '15%',
+              right: '5%',
+              fontSize: '5rem',
+              opacity: 0.1,
+              zIndex: -1,
+              filter: 'blur(1px)'
+            }}
+          >
+            💻
+          </motion.div>
+
+          <motion.div
+            variants={{
+              animate: {
+                y: [20, -20, 20],
+                rotate: [-5, 5, -5],
+                transition: {
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 2
+                }
+              }
+            }}
+            animate="animate"
+            style={{
+              position: 'absolute',
+              bottom: '15%',
+              left: '5%',
+              fontSize: '4rem',
+              opacity: 0.1,
+              zIndex: -1,
+              filter: 'blur(1px)'
+            }}
+          >
+            🚀
+          </motion.div>
+
+          <motion.div
+            variants={{
+              animate: {
+                y: [-15, 15, -15],
+                x: [10, -10, 10],
+                rotate: [0, 360],
+                transition: {
+                  duration: 10,
+                  repeat: Infinity,
+                  ease: "linear"
+                }
+              }
+            }}
+            animate="animate"
+            style={{
+              position: 'absolute',
+              top: '30%',
+              left: '15%',
+              fontSize: '3rem',
+              opacity: 0.08,
+              zIndex: -1,
+              filter: 'blur(2px)'
+            }}
+          >
+            ⚡
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   )
