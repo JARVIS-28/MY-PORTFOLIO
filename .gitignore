@@ -1,0 +1,14 @@
+# Ignore Vercel deployment files
+.vercel
+
+# Node.js dependencies
+node_modules
+
+# Build output
+.next
+
+# Logs
+*.log
+
+# Environment variables
+.env

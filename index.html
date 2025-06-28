@@ -1,14 +1,137 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/my-prtfolio/portfolio/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
-    <script type="module" crossorigin src="/my-prtfolio/portfolio/assets/index-BIIo0waA.js"></script>
-    <link rel="stylesheet" crossorigin href="/my-prtfolio/portfolio/assets/index-X9z4cdE7.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Janvii R V - Portfolio</title>
+    <link rel="stylesheet" href="assets/index-X9z4cdE7.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        section {
+            padding: 2rem;
+        }
+        .projects, .repos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            width: calc(33% - 2rem);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #333;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Janvii R V</h1>
+        <p>Computer Science student passionate about AI, ML, and building creative tech solutions!</p>
+    </header>
+    <section id="about">
+        <h2>About Me</h2>
+        <p>🎓 B.Tech CSE @ PES University</p>
+        <p>🤖 Passionate about Generative AI, Machine Learning, and building intelligent tools</p>
+        <p>🛠️ I love turning ideas into real-world applications</p>
+        <p>📚 Currently diving deep into LLMs, ChromaDB, CrewAI, and Knowledge Graphs</p>
+    </section>
+    <section id="tech-stack">
+        <h2>Tech Stack</h2>
+        <p>Python, Machine Learning, Generative AI, Knowledge Graphs, and more!</p>
+    </section>
+    <section id="projects">
+        <h2>Featured Projects</h2>
+        <div class="projects">
+            <div class="card">
+                <h3>Emotion-Based Playlist Generator</h3>
+                <p>Generates playlists based on user emotions.</p>
+                <a href="https://github.com/JARVIS-28/EMOTION_BASED_PLAYLIST_GENERATOR">View on GitHub</a>
+            </div>
+            <div class="card">
+                <h3>Pixel Art Converter</h3>
+                <p>Converts images into pixel art.</p>
+                <a href="https://github.com/JARVIS-28/PIXEL-ART-CONVERTER">View on GitHub</a>
+            </div>
+            <div class="card">
+                <h3>Search Engine</h3>
+                <p>A custom search engine implementation.</p>
+                <a href="https://github.com/JARVIS-28/Search-Engine">View on GitHub</a>
+            </div>
+            <div class="card">
+                <h3>Streaming and Batch Processing Analysis</h3>
+                <p>Analyzes streaming and batch data.</p>
+                <a href="https://github.com/JARVIS-28/Streaming-And-Batch-Processing-Analysis">View on GitHub</a>
+            </div>
+        </div>
+    </section>
+    <section id="repos">
+        <h2>Other Cool Repos</h2>
+        <div class="repos">
+            <div class="card">
+                <h3>CD-LAB</h3>
+                <p>Compiler Design Lab programs and explanations.</p>
+                <a href="https://github.com/JARVIS-28/CD-LAB">View on GitHub</a>
+            </div>
+            <div class="card">
+                <h3>Credit Card Fraud Detection</h3>
+                <p>ML system to flag fraudulent transactions.</p>
+                <a href="https://github.com/JARVIS-28/CREDIT-CARD-FRAUD-DETECTION">View on GitHub</a>
+            </div>
+        </div>
+    </section>
+    <section id="additional-projects">
+        <h2>Additional Projects</h2>
+        <div class="projects">
+            <div class="card">
+                <h3>URL Shortener</h3>
+                <p>A Python-based URL shortening service.</p>
+                <a href="https://github.com/JARVIS-28/URL-SHORTENER">View on GitHub</a>
+            </div>
+            <div class="card">
+                <h3>Parking Lot Finder</h3>
+                <p>A JavaScript project to locate parking lots.</p>
+                <a href="https://github.com/JARVIS-28/PARKING-LOT-FINDER">View on GitHub</a>
+            </div>
+            <div class="card">
+                <h3>Video Streaming Project</h3>
+                <p>A Python project for video streaming analysis.</p>
+                <a href="https://github.com/JARVIS-28/Video-Streaming-Project">View on GitHub</a>
+            </div>
+            <div class="card">
+                <h3>Syntax Validation Project</h3>
+                <p>A Python project for syntax validation.</p>
+                <a href="https://github.com/JARVIS-28/Syntax-Validation-Project">View on GitHub</a>
+            </div>
+            <div class="card">
+                <h3>Iverilog Vending Machine Project</h3>
+                <p>A Verilog project simulating a vending machine.</p>
+                <a href="https://github.com/JARVIS-28/Iverilog-Vending-Machine-Project">View on GitHub</a>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <p>📫 Contact: <a href="mailto:janviirv@gmail.com">janviirv@gmail.com</a></p>
+        <p>🌐 <a href="https://github.com/JARVIS-28">GitHub Profile</a></p>
+        <p>💬 Always open to collaborations in AI/ML & automation tools</p>
+    </footer>
+</body>
 </html>
