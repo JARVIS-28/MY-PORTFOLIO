@@ -25,7 +25,7 @@ A stunning, modern portfolio website built with Next.js, Three.js, and Framer Mo
 
 1. Clone the repository:
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/JARVIS-28/my-portfolio
 cd MY-PORTFOLIO
 ```
 
@@ -45,17 +45,26 @@ npm run dev
 
 ### Vercel Deployment (Recommended)
 
-1. Install Vercel CLI:
+#### Method 1: Fix Root Directory Issue
+If you encounter "Root Directory does not exist" error:
+
+1. Go to [Vercel Dashboard](https://vercel.com/dashboard)
+2. Select your `my-portfolio` project
+3. Go to **Settings** → **General**
+4. Under **Root Directory**, leave it **blank** or set it to `./`
+5. Click **Save**
+6. Redeploy using:
 ```bash
-npm install -g vercel
+vercel --prod
 ```
 
-2. Deploy to Vercel:
+#### Method 2: Fresh Deployment
+1. Delete the existing project from Vercel dashboard
+2. Deploy fresh:
 ```bash
 vercel
 ```
-
-3. Follow the prompts to complete deployment.
+3. Follow the prompts and select default settings
 
 ### Manual Deployment
 
@@ -67,6 +76,10 @@ npm run build
 2. The static files will be generated in the `out` folder.
 
 3. Upload the contents of the `out` folder to your hosting provider.
+
+### Current Live URLs
+- **Preview**: https://my-portfolio-e2g8yqub7-janvii-rvs-projects.vercel.app
+- **Previous**: https://my-portfolio-5wjuxtsuk-janvii-rvs-projects.vercel.app
 
 ## 📁 Project Structure
 
@@ -105,7 +118,8 @@ Adjust Framer Motion variants in individual components to customize animations.
 
 - **Email**: janviirv777@gmail.com
 - **GitHub**: [JARVIS-28](https://github.com/JARVIS-28)
-- **LinkedIn**: [Your LinkedIn Profile]
+- **LinkedIn**: [Janvii R V](https://linkedin.com/in/janvii-rv)
+- **Portfolio**: [https://my-portfolio-e2g8yqub7-janvii-rvs-projects.vercel.app](https://my-portfolio-e2g8yqub7-janvii-rvs-projects.vercel.app)
 
 ## 📄 License
 

@@ -1,13 +1,55 @@
-import { motion } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
+import { useRef } from 'react';
+import { useInView } from 'framer-motion';
+
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.1,
+            delayChildren: 0.2
+        }
+    }
+};
+
+const cardVariants = {
+    hidden: { 
+        opacity: 0, 
+        y: 50,
+        scale: 0.9 
+    },
+    visible: { 
+        opacity: 1, 
+        y: 0,
+        scale: 1,
+        transition: {
+            duration: 0.6,
+            ease: "easeOut"
+        }
+    }
+};
+
+const titleVariants = {
+    hidden: { opacity: 0, y: -50 },
+    visible: { 
+        opacity: 1, 
+        y: 0,
+        transition: { duration: 0.8, ease: "easeOut" }
+    }
+};
 
 export default function Projects() {
+    const ref = useRef(null)
+    const isInView = useInView(ref, { once: true })
+
     const projects = [
         {
             title: "Emotion-Based Playlist Generator",
             description: "A sophisticated music recommendation system that analyzes diary entries using NLP and sentiment analysis to create personalized playlists that guide users through emotional journeys. Features React frontend with Tailwind UI, FastAPI backend, and integrates Spotify API, ChromaDB vector database, and Ollama LLMs.",
             tech: ["Python", "FastAPI", "React", "TypeScript", "ChromaDB", "Ollama", "Spotify API", "NLP", "Machine Learning", "Sentence Transformers"],
             link: "https://github.com/JARVIS-28/EMOTION_BASED_PLAYLIST_GENERATOR",
-            gradient: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
+            gradient: "linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)",
             icon: "🎵"
         },
         {
@@ -15,7 +57,7 @@ export default function Projects() {
             description: "A modern multi-source search engine with React frontend and Flask backend. Integrates Reddit, Wikipedia, ArXiv, News APIs, and YouTube for comprehensive results. Features semantic search using Sentence Transformers, real-time particle animations, dark/light themes, and intelligent result ranking with TF-IDF scoring.",
             tech: ["React", "Flask", "Python", "JavaScript", "BeautifulSoup", "Sentence Transformers", "NLTK", "Reddit API", "NewsAPI", "DuckDuckGo API", "scikit-learn"],
             link: "https://github.com/JARVIS-28/Search-Engine",
-            gradient: "linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%)",
+            gradient: "linear-gradient(135deg, #ec4899 0%, #f97316 100%)",
             icon: "🔍"
         },
         {
@@ -23,7 +65,7 @@ export default function Projects() {
             description: "A desktop application built with Electron that transforms regular images into stylized pixel art. Features multiple pixelation styles (Basic, Color-Limited, Mosaic, ASCII, Isometric, Cartoon), live preview, retro-themed UI with Press Start 2P font, and Canvas API for image processing.",
             tech: ["Electron", "Node.js", "JavaScript", "HTML5", "CSS3", "Canvas API", "Image Processing"],
             link: "https://github.com/JARVIS-28/PIXEL-ART-CONVERTER",
-            gradient: "linear-gradient(135deg, #ec4899 0%, #f97316 100%)",
+            gradient: "linear-gradient(135deg, #f97316 0%, #22c55e 100%)",
             icon: "🎨"
         },
         {
@@ -31,7 +73,7 @@ export default function Projects() {
             description: "Comprehensive data analysis system that handles both real-time streaming data and batch processing for large datasets with visualization dashboards.",
             tech: ["Python", "Apache Kafka", "Data Analysis", "Visualization"],
             link: "https://github.com/JARVIS-28/Streaming-And-Batch-Processing-Analysis",
-            gradient: "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)",
+            gradient: "linear-gradient(135deg, #22c55e 0%, #06b6d4 100%)",
             icon: "📊"
         },
         {
@@ -39,7 +81,7 @@ export default function Projects() {
             description: "Machine learning system to detect fraudulent credit card transactions using ensemble methods and anomaly detection algorithms.",
             tech: ["Python", "Scikit-learn", "Pandas", "Machine Learning"],
             link: "https://github.com/JARVIS-28/CREDIT-CARD-FRAUD-DETECTION",
-            gradient: "linear-gradient(135deg, #06b6d4 0%, #0891b2 100%)",
+            gradient: "linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%)",
             icon: "🛡️"
         },
         {
@@ -47,38 +89,51 @@ export default function Projects() {
             description: "A Python-based URL shortening service with analytics, custom aliases, and expiration features. Built with FastAPI and PostgreSQL.",
             tech: ["Python", "FastAPI", "PostgreSQL", "Redis"],
             link: "https://github.com/JARVIS-28/URL-SHORTENER",
-            gradient: "linear-gradient(135deg, #22c55e 0%, #16a34a 100%)",
+            gradient: "linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)",
             icon: "🔗"
         }
     ];
 
     return (
-        <section id="projects" className="section section-alt">
+        <section id="projects" className="section section-alt" ref={ref}>
             <div className="container">
                 <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    viewport={{ once: true }}
+                    variants={titleVariants}
+                    initial="hidden"
+                    animate={isInView ? "visible" : "hidden"}
                     className="text-center mb-12"
                 >
-                    <h2>Featured Projects</h2>
-                    <p>A collection of projects showcasing my skills in AI, ML, and full-stack development</p>
+                    <motion.h2
+                        initial={{ opacity: 0, scale: 0.5 }}
+                        animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.5 }}
+                        transition={{ duration: 0.8, ease: "backOut" }}
+                    >
+                        Check out some of my projects
+                    </motion.h2>
+                    <motion.p
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                        transition={{ delay: 0.3, duration: 0.8 }}
+                    >
+                        A collection of projects showcasing my skills in AI, ML, and software development
+                    </motion.p>
                 </motion.div>
 
-                <div className="cards-grid">
+                <motion.div 
+                    className="cards-grid"
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate={isInView ? "visible" : "hidden"}
+                >
                     {projects.map((project, index) => (
                         <motion.div
                             key={index}
-                            initial={{ opacity: 0, y: 50, scale: 0.95 }}
-                            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                            transition={{ delay: index * 0.1, duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}
-                            viewport={{ once: true }}
+                            variants={cardVariants}
                             whileHover={{ 
-                                y: -15, 
+                                y: -15,
                                 scale: 1.03,
-                                boxShadow: "0 25px 50px rgba(139, 92, 246, 0.3)",
-                                transition: { duration: 0.3 }
+                                rotateY: 5,
+                                transition: { duration: 0.3, ease: "easeOut" }
                             }}
                             className="card project-card"
                             style={{
@@ -89,6 +144,7 @@ export default function Projects() {
                         >
                             {/* Animated background gradient on hover */}
                             <motion.div
+                                className="card-bg-gradient"
                                 style={{
                                     position: 'absolute',
                                     inset: 0,
@@ -107,99 +163,74 @@ export default function Projects() {
                                     position: 'relative',
                                     zIndex: 1
                                 }}
-                                initial={{ scale: 0 }}
-                                whileInView={{ scale: 1 }}
+                                initial={{ scale: 0, rotate: -180 }}
+                                animate={{ scale: 1, rotate: 0 }}
                                 transition={{ 
                                     delay: index * 0.1 + 0.5, 
                                     duration: 0.6,
                                     type: "spring",
                                     stiffness: 200
                                 }}
-                                viewport={{ once: true }}
                                 whileHover={{ 
-                                    scale: 1.1,
-                                    transition: { duration: 0.3 }
+                                    scale: 1.2,
+                                    rotate: 360,
+                                    transition: { duration: 0.5 }
                                 }}
                             >
                                 {project.icon}
                             </motion.div>
 
                             <motion.h3
-                                style={{ 
-                                    position: 'relative', 
-                                    zIndex: 1,
-                                    background: project.gradient,
-                                    WebkitBackgroundClip: 'text',
-                                    WebkitTextFillColor: 'transparent',
-                                    backgroundClip: 'text',
-                                    marginBottom: '1rem',
-                                    fontSize: '1.4rem',
-                                    fontWeight: '700'
-                                }}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.1 + 0.3, duration: 0.6 }}
-                                viewport={{ once: true }}
+                                style={{ position: 'relative', zIndex: 1 }}
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: index * 0.1 + 0.7, duration: 0.6 }}
                             >
                                 {project.title}
                             </motion.h3>
 
                             <motion.p
-                                style={{ 
-                                    position: 'relative', 
-                                    zIndex: 1,
-                                    color: 'rgba(255, 255, 255, 0.85)',
-                                    lineHeight: '1.6',
-                                    marginBottom: '1.5rem'
-                                }}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.1 + 0.4, duration: 0.6 }}
-                                viewport={{ once: true }}
+                                style={{ position: 'relative', zIndex: 1 }}
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: index * 0.1 + 0.9, duration: 0.6 }}
                             >
                                 {project.description}
                             </motion.p>
                             
                             <motion.div 
                                 className="tech-tags"
-                                style={{ 
-                                    position: 'relative', 
-                                    zIndex: 1,
-                                    marginBottom: '2rem'
-                                }}
+                                style={{ position: 'relative', zIndex: 1 }}
                                 initial={{ opacity: 0 }}
-                                whileInView={{ opacity: 1 }}
-                                transition={{ delay: index * 0.1 + 0.5, duration: 0.6 }}
-                                viewport={{ once: true }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: index * 0.1 + 1.1, duration: 0.6 }}
                             >
                                 {project.tech.map((tech, techIndex) => (
                                     <motion.span 
                                         key={techIndex} 
                                         className="tech-tag"
                                         initial={{ opacity: 0, scale: 0 }}
-                                        whileInView={{ opacity: 1, scale: 1 }}
+                                        animate={{ opacity: 1, scale: 1 }}
                                         transition={{ 
-                                            delay: index * 0.1 + 0.6 + techIndex * 0.05,
+                                            delay: index * 0.1 + 1.3 + techIndex * 0.1,
                                             duration: 0.4,
                                             type: "spring",
                                             stiffness: 200
                                         }}
-                                        viewport={{ once: true }}
                                         whileHover={{ 
                                             scale: 1.1,
-                                            backgroundColor: 'rgba(139, 92, 246, 0.3)',
-                                            borderColor: '#8b5cf6'
+                                            background: project.gradient,
+                                            color: '#ffffff'
                                         }}
                                         style={{
-                                            background: 'rgba(255, 255, 255, 0.1)',
-                                            border: '1px solid rgba(139, 92, 246, 0.3)',
-                                            color: 'rgba(255, 255, 255, 0.9)',
-                                            padding: '0.4rem 0.8rem',
+                                            background: 'rgba(139, 92, 246, 0.2)',
+                                            border: '1px solid rgba(139, 92, 246, 0.4)',
                                             borderRadius: '20px',
-                                            fontSize: '0.85rem',
+                                            padding: '0.5rem 1rem',
                                             margin: '0.25rem',
                                             display: 'inline-block',
-                                            backdropFilter: 'blur(10px)',
+                                            fontSize: '0.85rem',
+                                            fontWeight: '500',
                                             transition: 'all 0.3s ease'
                                         }}
                                     >
@@ -219,6 +250,7 @@ export default function Projects() {
                                     display: 'inline-flex',
                                     alignItems: 'center',
                                     gap: '0.5rem',
+                                    marginTop: '1.5rem',
                                     padding: '0.75rem 1.5rem',
                                     background: project.gradient,
                                     borderRadius: '30px',
@@ -228,9 +260,8 @@ export default function Projects() {
                                     transition: 'all 0.3s ease'
                                 }}
                                 initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.1 + 0.8, duration: 0.6 }}
-                                viewport={{ once: true }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: index * 0.1 + 1.5, duration: 0.6 }}
                                 whileHover={{ 
                                     scale: 1.05,
                                     boxShadow: '0 10px 30px rgba(139, 92, 246, 0.4)',
@@ -243,7 +274,7 @@ export default function Projects() {
                                     whileHover={{ x: 5 }}
                                     transition={{ duration: 0.2 }}
                                 >
-                                    View Project
+                                    View on GitHub
                                 </motion.span>
                                 <motion.svg 
                                     style={{ width: '16px', height: '16px' }} 
@@ -259,7 +290,7 @@ export default function Projects() {
                             </motion.a>
                         </motion.div>
                     ))}
-                </div>
+                </motion.div>
             </div>
         </section>
     );
