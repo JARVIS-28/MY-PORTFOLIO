@@ -45,8 +45,8 @@ export default function Contact() {
     {
       icon: '📧',
       label: 'Email',
-      value: 'janviirv28@gmail.com',
-      href: 'mailto:janviirv28@gmail.com',
+      value: 'janviirv@gmail.com',
+      href: 'mailto:janviirv@gmail.com',
       gradient: 'linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)',
       description: 'Drop me a line anytime!'
     },

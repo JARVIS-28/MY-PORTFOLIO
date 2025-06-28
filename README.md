@@ -83,6 +83,7 @@ npm run build
 3. Upload the contents of the `out` folder to your hosting provider.
 
 ### Current Live URLs
+- **Production**: https://my-portfolio-8ep5o7sgd-janvii-rvs-projects.vercel.app
 - **Preview**: https://my-portfolio-e2g8yqub7-janvii-rvs-projects.vercel.app
 - **Previous**: https://my-portfolio-5wjuxtsuk-janvii-rvs-projects.vercel.app
 
@@ -124,7 +125,7 @@ Adjust Framer Motion variants in individual components to customize animations.
 - **Email**: janviirv777@gmail.com
 - **GitHub**: [JARVIS-28](https://github.com/JARVIS-28)
 - **LinkedIn**: [Janvii R V](https://linkedin.com/in/janvii-rv)
-- **Portfolio**: [https://my-portfolio-e2g8yqub7-janvii-rvs-projects.vercel.app](https://my-portfolio-e2g8yqub7-janvii-rvs-projects.vercel.app)
+- **Portfolio**: [https://my-portfolio-8ep5o7sgd-janvii-rvs-projects.vercel.app](https://my-portfolio-8ep5o7sgd-janvii-rvs-projects.vercel.app)
 
 ## 📄 License
 
