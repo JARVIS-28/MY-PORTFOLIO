@@ -64,9 +64,14 @@ vercel --prod
 ```bash
 vercel
 ```
-3. Follow the prompts and select default settings
-
-### Manual Deployment
+#### Method 3: GitHub Integration (Recommended)
+1. Push your code to GitHub (gh-pages branch)
+2. Go to [Vercel Dashboard](https://vercel.com/dashboard)
+3. Click **"New Project"**
+4. Import your GitHub repository
+5. Set **Branch** to `gh-pages`
+6. Set **Root Directory** to blank or `./`
+7. Vercel will auto-detect Next.js and deploy correctly
 
 1. Build the project:
 ```bash
