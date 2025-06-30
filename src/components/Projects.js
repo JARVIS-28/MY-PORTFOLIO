@@ -155,26 +155,14 @@ export default function Projects() {
                                 whileHover={{ opacity: 0.1 }}
                             />
 
-                            {/* Animated icon */}
+                            {/* Project icon */}
                             <motion.div
+                                className="cursor-reactive"
                                 style={{
                                     fontSize: '3rem',
                                     marginBottom: '1rem',
                                     position: 'relative',
                                     zIndex: 1
-                                }}
-                                initial={{ scale: 0, rotate: -180 }}
-                                animate={{ scale: 1, rotate: 0 }}
-                                transition={{ 
-                                    delay: index * 0.1 + 0.5, 
-                                    duration: 0.6,
-                                    type: "spring",
-                                    stiffness: 200
-                                }}
-                                whileHover={{ 
-                                    scale: 1.2,
-                                    rotate: 360,
-                                    transition: { duration: 0.5 }
                                 }}
                             >
                                 {project.icon}

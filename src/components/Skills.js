@@ -1,342 +1,494 @@
-import { motion } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
+import { useRef } from 'react'
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.3
+    }
+  }
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 50, scale: 0.8 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.6,
+      ease: [0.6, -0.05, 0.01, 0.99]
+    }
+  }
+}
 
 export default function Skills() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true })
+
   const skills = [
-    { 
-      name: 'Python', 
-      level: 90,
-      icon: (
-        <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: '2rem', height: '2rem' }}>
-          <path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09zm13.09 3.95l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08z"/>
-        </svg>
-      ),
-      color: '#3776ab'
-    },
-    { 
-      name: 'JavaScript', 
-      level: 85,
-      icon: (
-        <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: '2rem', height: '2rem' }}>
-          <path d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z"/>
-        </svg>
-      ),
-      color: '#f7df1e'
-    },
-    { 
-      name: 'React', 
-      level: 85,
-      icon: (
-        <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: '2rem', height: '2rem' }}>
-          <path d="M14.23 12.004a2.236 2.236 0 0 1-2.235 2.236 2.236 2.236 0 0 1-2.236-2.236 2.236 2.236 0 0 1 2.235-2.236 2.236 2.236 0 0 1 2.236 2.236zm2.648-10.69c-1.346 0-3.107.96-4.888 2.622-1.78-1.653-3.542-2.602-4.887-2.602-.41 0-.783.093-1.106.278-1.375.793-1.683 3.264-.973 6.365C1.98 8.917 0 10.42 0 12.004c0 1.59 1.99 3.097 5.043 4.03-.704 3.113-.39 5.588.988 6.38.32.187.69.275 1.102.275 1.345 0 3.107-.96 4.888-2.624 1.78 1.654 3.542 2.603 4.887 2.603.41 0 .783-.09 1.106-.275 1.374-.792 1.683-3.263.973-6.365C22.02 15.096 24 13.59 24 12.004c0-1.59-1.99-3.097-5.043-4.032.704-3.11.39-5.587-.988-6.38-.318-.184-.688-.277-1.092-.278zm-.005 1.09v.006c.225 0 .406.044.558.127.666.382.955 1.835.73 3.704-.054.46-.142.945-.25 1.44-.96-.236-2.006-.417-3.107-.534-.66-.905-1.345-1.727-2.035-2.447 1.592-1.48 3.087-2.292 4.105-2.295zm-9.77.02c1.012 0 2.514.808 4.11 2.28-.686.72-1.37 1.537-2.02 2.442-1.107.117-2.154.298-3.113.538-.112-.49-.195-.964-.254-1.42-.23-1.868.054-3.32.714-3.707.19-.09.4-.127.563-.132zm4.882 3.05c.455.468.91.992 1.36 1.564-.44-.02-.89-.034-1.345-.034-.46 0-.915.01-1.36.034.44-.572.895-1.096 1.345-1.565zM12 8.1c.74 0 1.477.034 2.202.093.406.582.802 1.203 1.183 1.86.372.64.71 1.29 1.018 1.946-.308.655-.646 1.31-1.013 1.95-.38.66-.773 1.288-1.18 1.87-.728.063-1.466.098-2.21.098-.74 0-1.477-.035-2.202-.093-.406-.582-.802-1.204-1.183-1.86-.372-.64-.71-1.29-1.018-1.946.303-.657.646-1.313 1.013-1.954.38-.66.773-1.286 1.18-1.868.728-.064 1.466-.099 2.21-.099zm-3.635.254c-.24.377-.48.763-.704 1.16-.225.39-.435.782-.635 1.174-.265-.656-.49-1.31-.676-1.947.64-.15 1.315-.283 2.015-.386zm7.26 0c.695.103 1.365.23 2.006.387-.18.632-.405 1.282-.66 1.933-.2-.39-.41-.783-.64-1.174-.225-.392-.465-.774-.705-1.146zm3.063.675c.484.15.944.317 1.375.498 1.732.74 2.852 1.708 2.852 2.476-.005.768-1.125 1.74-2.857 2.475-.42.18-.88.342-1.355.493-.28-.958-.646-1.956-1.1-2.98.45-1.017.81-2.01 1.085-2.964zm-13.395.004c.278.96.645 1.957 1.1 2.98-.45 1.017-.812 2.01-1.086 2.964-.484-.15-.944-.318-1.37-.5-1.732-.737-2.852-1.706-2.852-2.474 0-.768 1.12-1.742 2.852-2.476.42-.18.88-.342 1.356-.494zm11.678 4.28c.265.657.49 1.312.676 1.948-.64.157-1.316.29-2.016.39.24-.375.48-.762.705-1.158.225-.39.435-.788.636-1.18zm-9.945.02c.2.392.41.783.64 1.175.23.39.465.772.705 1.143-.695-.102-1.365-.23-2.006-.386.18-.63.406-1.282.66-1.933zM17.92 16.32c.112.493.2.968.254 1.423.23 1.868-.054 3.32-.714 3.708-.147.09-.338.128-.563.128-1.012 0-2.514-.807-4.11-2.28.686-.72 1.37-1.536 2.02-2.44 1.107-.118 2.154-.3 3.113-.54zm-11.83.01c.96.234 2.006.415 3.107.532.66.905 1.345 1.727 2.035 2.446-1.595 1.483-3.092 2.295-4.11 2.295-.22-.005-.406-.05-.553-.132-.666-.38-.955-1.834-.73-3.703.054-.46.142-.944.25-1.438zm4.56.64c.44.02.89.034 1.345.034.46 0 .915-.01 1.36-.034-.44.572-.895 1.095-1.345 1.565-.455-.47-.91-.993-1.36-1.565z"/>
-        </svg>
-      ),
-      color: '#61dafb'
-    },
-    { 
-      name: 'Node.js', 
-      level: 80,
-      icon: (
-        <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: '2rem', height: '2rem' }}>
-          <path d="M11.998,24c-0.321,0-0.641-0.084-0.922-0.247l-2.936-1.737c-0.438-0.245-0.224-0.332-0.08-0.383 c0.585-0.203,0.703-0.25,1.328-0.604c0.065-0.037,0.151-0.023,0.218,0.017l2.256,1.339c0.082,0.045,0.197,0.045,0.272,0l8.795-5.076 c0.082-0.047,0.134-0.141,0.134-0.238V6.921c0-0.099-0.053-0.192-0.137-0.242l-8.791-5.072c-0.081-0.047-0.189-0.047-0.271,0 L3.075,6.68C2.99,6.729,2.936,6.825,2.936,6.921v10.15c0,0.097,0.054,0.189,0.139,0.235l2.409,1.392 c1.307,0.654,2.108-0.116,2.108-0.89V7.787c0-0.142,0.114-0.253,0.256-0.253h1.115c0.139,0,0.255,0.112,0.255,0.253v10.021 c0,1.745-0.95,2.745-2.604,2.745c-0.508,0-0.909,0-2.026-0.551L2.28,18.675c-0.57-0.329-0.922-0.945-0.922-1.604V6.921 c0-0.659,0.353-1.275,0.922-1.603l8.795-5.082c0.557-0.315,1.296-0.315,1.848,0l8.794,5.082c0.570,0.329,0.924,0.944,0.924,1.603 v10.15c0,0.659-0.354,1.273-0.924,1.604l-8.794,5.078C12.643,23.916,12.324,24,11.998,24z M19.099,13.993 c0-1.9-1.284-2.406-3.987-2.763c-2.731-0.361-3.009-0.548-3.009-1.187c0-0.528,0.235-1.233,2.258-1.233 c1.807,0,2.473,0.389,2.747,1.607c0.024,0.115,0.129,0.199,0.247,0.199h1.141c0.071,0,0.138-0.031,0.186-0.081 c0.048-0.054,0.074-0.123,0.067-0.196c-0.177-2.098-1.571-3.076-4.388-3.076c-2.508,0-4.004,1.058-4.004,2.833 c0,1.925,1.488,2.457,3.895,2.695c2.88,0.282,3.103,0.703,3.103,1.269c0,0.983-0.789,1.402-2.642,1.402 c-2.327,0-2.839-0.584-3.011-1.742c-0.02-0.124-0.126-0.215-0.253-0.215h-1.137c-0.141,0-0.254,0.112-0.254,0.253 c0,1.482,0.806,3.248,4.655,3.248C17.501,17.007,19.099,15.91,19.099,13.993z"/>
-        </svg>
-      ),
-      color: '#68a063'
-    },
-    { 
-      name: 'FastAPI', 
-      level: 82,
-      icon: (
-        <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: '2rem', height: '2rem' }}>
-          <path d="M12 0C5.375 0 0 5.375 0 12c0 6.627 5.375 12 12 12 6.626 0 12-5.373 12-12 0-6.625-5.374-12-12-12zm-.624 21.62v-7.528H7.19L13.203 2.38v7.528h4.187L11.376 21.62z"/>
-        </svg>
-      ),
-      color: '#009688'
-    },
-    { 
-      name: 'Flask', 
-      level: 78,
-      icon: (
-        <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: '2rem', height: '2rem' }}>
-          <path d="M7.8 4.95v5.7L2.25 18.9c-.35.55-.03 1.29.7 1.29h17.1c.73 0 1.05-.74.7-1.29L15.2 10.65V4.95zM8.7 2.85h6.6c.5 0 .9.4.9.9s-.4.9-.9.9H8.7c-.5 0-.9-.4-.9-.9s.4-.9.9-.9z"/>
-        </svg>
-      ),
-      color: '#000000'
-    },
-    { 
-      name: 'Machine Learning', 
-      level: 85,
-      icon: (
-        <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: '2rem', height: '2rem' }}>
-          <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z"/>
-        </svg>
-      ),
-      color: '#ff6f00'
-    },
-    { 
-      name: 'Java', 
-      level: 75,
-      icon: (
-        <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: '2rem', height: '2rem' }}>
-          <path d="M8.851 18.56s-.917.534.653.714c1.902.218 2.874.187 4.969-.211 0 0 .552.346 1.321.646-4.699 2.013-10.633-.118-6.943-1.149M8.276 15.933s-1.028.761.542.924c2.032.209 3.636.227 6.413-.308 0 0 .384.389.987.602-5.679 1.661-12.007.13-7.942-1.218M13.116 11.475c1.158 1.333-.304 2.533-.304 2.533s2.939-1.518 1.589-3.418c-1.261-1.772-2.228-2.652 3.007-5.688 0-.001-8.216 2.051-4.292 6.573M19.33 20.504s.679.559-.747.991c-2.712.822-11.288 1.069-13.669.033-.856-.373.75-.89 1.254-.998.527-.114.828-.093.828-.093-.953-.671-6.156 1.317-2.643 1.887 9.58 1.553 17.462-.7 14.977-1.82M9.292 13.21s-4.362 1.036-1.544 1.412c1.189.159 3.561.123 5.77-.062 1.806-.152 3.618-.477 3.618-.477s-.637.272-1.098.587c-4.429 1.165-12.986.623-10.522-.568 2.082-1.006 3.776-.892 3.776-.892M17.116 17.584c4.503-2.34 2.421-4.589.968-4.285-.355.074-.515.138-.515.138s.132-.207.385-.297c2.875-1.011 5.086 2.981-.928 4.562 0-.001.07-.062.09-.118M14.401 0s2.494 2.494-2.365 6.33c-3.896 3.077-.888 4.832-.001 6.836-2.274-2.053-3.943-3.858-2.824-5.539 1.644-2.469 6.197-3.665 5.19-7.627M9.734 23.924c4.322.277 10.959-.153 11.116-2.198 0 0-.302.775-3.572 1.391-3.688.694-8.239.613-10.937.168 0-.001.553.457 3.393.639"/>
-        </svg>
-      ),
-      color: '#ED8B00'
-    },
-    { 
-      name: 'HTML/CSS', 
-      level: 90,
-      icon: (
-        <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: '2rem', height: '2rem' }}>
-          <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/>
-        </svg>
-      ),
-      color: '#e34c26'
-    },
-    { 
-      name: 'Git', 
-      level: 85,
-      icon: (
-        <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: '2rem', height: '2rem' }}>
-          <path d="M23.546 10.93L13.067.452c-.604-.603-1.582-.603-2.188 0L8.708 2.627l2.76 2.76c.645-.215 1.379-.07 1.889.441.516.515.658 1.258.438 1.9l2.658 2.66c.645-.223 1.387-.078 1.9.435.721.72.721 1.884 0 2.604-.719.719-1.881.719-2.6 0-.539-.541-.674-1.337-.404-1.996L12.86 8.955v6.525c.176.086.342.203.488.348.713.721.713 1.883 0 2.6-.719.721-1.889.721-2.609 0-.719-.719-.719-1.879 0-2.598.182-.18.387-.316.605-.406V8.835c-.217-.091-.424-.222-.6-.401-.545-.545-.676-1.342-.396-2.009L7.636 3.7.45 10.881c-.6.605-.6 1.584 0 2.189l10.48 10.477c.604.604 1.582.604 2.186 0l10.43-10.43c.605-.603.605-1.582 0-2.187"/>
-        </svg>
-      ),
-      color: '#f1502f'
-    },
-    { 
-      name: 'SQL/MySQL', 
-      level: 78,
-      icon: (
-        <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: '2rem', height: '2rem' }}>
-          <path d="M16.405 5.501c-.115 0-.193.014-.274.033v.013h.014c.054.104.146.18.214.273.054.107.1.214.154.32l.014-.015c.094-.066.14-.171.14-.333-.04-.047-.046-.094-.08-.14-.04-.067-.126-.1-.18-.153zM5.77 18.695h-.927a50.854 50.854 0 00-.27-4.41h-.008l-1.41 4.41H2.45l-1.4-4.41h-.01a72.892 72.892 0 00-.195 4.41H.239c.024-1.67.312-3.262.84-4.768h.99l1.342 4.086h.008l1.35-4.086h.99c.322 1.553.585 3.08.832 4.768zm6.73 0h-.927c-.024-1.688-.312-3.262-.84-4.768h-.99L8.401 18.013h-.008l-1.342-4.086h-.99c-.322 1.553-.585 3.08-.832 4.768h-.605c.024-1.67.312-3.262.84-4.768h.99l1.342 4.086h.008l1.35-4.086h.99c.322 1.553.585 3.08.832 4.768zm7.05 0h-.927c-.024-1.688-.312-3.262-.84-4.768h-.99l-1.342 4.086h-.008l-1.342-4.086h-.99c-.322 1.553-.585 3.08-.832 4.768h-.605c.024-1.67.312-3.262.84-4.768h.99l1.342 4.086h.008l1.35-4.086h.99c.322 1.553.585 3.08.832 4.768z"/>
-        </svg>
-      ),
-      color: '#00758f'
-    },
-    { 
-      name: 'ChromaDB', 
-      level: 72,
-      icon: (
-        <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: '2rem', height: '2rem' }}>
-          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-        </svg>
-      ),
-      color: '#ff6b35'
-    },
-    { 
-      name: 'Figma', 
-      level: 70,
-      icon: (
-        <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: '2rem', height: '2rem' }}>
-          <path d="M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.355 3.019-3.019s-1.354-3.02-3.019-3.02h-3.117V7.51zm0 1.471H8.148c-2.476 0-4.49-2.015-4.49-4.491S5.672 0 8.148 0h4.588v8.981zm-4.587-7.51c-1.665 0-3.019 1.355-3.019 3.02s1.354 3.019 3.019 3.019h3.117V1.471H8.148zm4.587 15.019H8.148c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h4.588v8.98zM8.148 8.981c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h3.117v-6.038H8.148zm7.704 0c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.49-4.49 4.49-4.49-2.014-4.49-4.49 2.014-4.49 4.49-4.49zm0 7.51c1.665 0 3.019-1.355 3.019-3.02s-1.354-3.019-3.019-3.019-3.019 1.355-3.019 3.019 1.354 3.02 3.019 3.02zM8.148 24c2.476 0 4.49-2.014 4.49-4.49v-4.49H8.148c-2.476 0-4.49 2.014-4.49 4.49S5.672 24 8.148 24zm0-7.51h3.117v3.019c0 1.665-1.355 3.019-3.117 3.019s-3.019-1.354-3.019-3.019 1.354-3.019 3.019-3.019z"/>
-        </svg>
-      ),
-      color: '#f24e1e'
-    }
+    { name: 'Python', icon: '🐍', level: 90, color: '#3776ab', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
+    { name: 'JavaScript', icon: '⚡', level: 85, color: '#f7df1e', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
+    { name: 'React', icon: '⚛️', level: 80, color: '#61dafb', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
+    { name: 'Next.js', icon: '▲', level: 75, color: '#000000', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg' },
+    { name: 'Node.js', icon: '🟢', level: 80, color: '#68a063', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
+    { name: 'Machine Learning', icon: '🤖', level: 85, color: '#ff6b35', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg' },
+    { name: 'AI/LLMs', icon: '🧠', level: 80, color: '#8b5cf6', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg' },
+    { name: 'SQL', icon: '🗄️', level: 75, color: '#336791', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' },
+    { name: 'Git', icon: '📋', level: 85, color: '#f05032', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
+    { name: 'Java', icon: '☕', level: 70, color: '#ed8b00', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg' },
+    { name: 'HTML/CSS', icon: '🎨', level: 90, color: '#e34c26', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
+    { name: 'Figma', icon: '🎨', level: 85, color: '#f24e1e', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg' }
   ]
 
   return (
-    <section id="skills" className="section">
-      <div className="container">
+    <section id="skills" className="section" ref={ref} style={{ position: 'relative', overflow: 'hidden' }}>
+      {/* Animated background elements */}
+      <motion.div
+        style={{
+          position: 'absolute',
+          top: '10%',
+          right: '5%',
+          width: '400px',
+          height: '400px',
+          background: 'radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 70%)',
+          borderRadius: '50%',
+          filter: 'blur(60px)',
+          zIndex: 0
+        }}
+        animate={{
+          x: [0, -50, 0],
+          y: [0, 30, 0],
+          scale: [1, 1.2, 1],
+          opacity: [0.15, 0.25, 0.15]
+        }}
+        transition={{
+          duration: 12,
+          repeat: Infinity,
+          ease: 'easeInOut'
+        }}
+      />
+
+      <motion.div
+        style={{
+          position: 'absolute',
+          bottom: '10%',
+          left: '5%',
+          width: '350px',
+          height: '350px',
+          background: 'radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%)',
+          borderRadius: '50%',
+          filter: 'blur(60px)',
+          zIndex: 0
+        }}
+        animate={{
+          x: [0, 60, 0],
+          y: [0, -40, 0],
+          scale: [1, 1.1, 1],
+          opacity: [0.15, 0.3, 0.15]
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          ease: 'easeInOut',
+          delay: 3
+        }}
+      />
+
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
           className="text-center mb-12"
+          style={{ position: 'relative' }}
         >
-          <h2>Technical Skills</h2>
-          <p>Technologies and tools I work with to bring ideas to life</p>
+          <motion.h2
+            variants={itemVariants}
+            className="text-glow"
+            style={{
+              fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+              background: 'linear-gradient(135deg, #06b6d4 0%, #8b5cf6 50%, #ec4899 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              position: 'relative',
+              marginBottom: '1rem'
+            }}
+            whileHover={{
+              textShadow: '0 0 30px rgba(6, 182, 212, 0.6)'
+            }}
+          >
+            My Skills
+            
+            {/* Animated underline */}
+            <motion.div
+              style={{
+                position: 'absolute',
+                bottom: '-10px',
+                left: '50%',
+                width: '0%',
+                height: '4px',
+                background: 'linear-gradient(90deg, #06b6d4, #8b5cf6, #ec4899)',
+                borderRadius: '2px'
+              }}
+              initial={{ width: '0%', x: '-50%' }}
+              animate={isInView ? { width: '100%', x: '-50%' } : { width: '0%', x: '-50%' }}
+              transition={{ delay: 1, duration: 1.2, ease: 'easeOut' }}
+            />
+          </motion.h2>
+          
+          <motion.p
+            variants={itemVariants}
+            style={{
+              fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
+              color: 'rgba(255, 255, 255, 0.8)',
+              fontWeight: '400',
+              letterSpacing: '0.5px'
+            }}
+            whileHover={{
+              color: 'rgba(255, 255, 255, 1)',
+              textShadow: '0 0 10px rgba(255, 255, 255, 0.3)'
+            }}
+          >
+            Technologies and tools I use to bring ideas to life
+          </motion.p>
         </motion.div>
 
-        <div className="skills-grid">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+            gap: 'clamp(1rem, 2.5vw, 1.5rem)',
+            marginBottom: '4rem',
+            maxWidth: '1000px',
+            margin: '0 auto 4rem auto',
+            padding: '0 1rem'
+          }}
+        >
           {skills.map((skill, index) => (
             <motion.div
               key={skill.name}
-              initial={{ opacity: 0, scale: 0.8, y: 30 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ delay: index * 0.1, duration: 0.6, ease: [0.6, -0.05, 0.01, 0.99] }}
-              viewport={{ once: true }}
-              whileHover={{ 
-                scale: 1.08, 
-                y: -8,
-                boxShadow: `0 20px 40px ${skill.color}30`,
-                transition: { duration: 0.3 }
-              }}
-              className="skill-card"
+              variants={itemVariants}
+              className="cursor-reactive"
               style={{
-                background: 'linear-gradient(145deg, rgba(30, 30, 60, 0.9) 0%, rgba(0, 0, 0, 0.8) 100%)',
-                border: `1px solid ${skill.color}40`,
+                background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1), rgba(6, 182, 212, 0.1))',
+                backgroundSize: '400% 400%',
+                backdropFilter: 'blur(20px)',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                borderRadius: '20px',
+                padding: 'clamp(1rem, 2vw, 1.5rem)',
+                textAlign: 'center',
                 position: 'relative',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+                transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                minHeight: '180px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                width: '100%',
+                maxWidth: '240px'
               }}
+              animate={{
+                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
+              }}
+              transition={{
+                backgroundPosition: {
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: 'linear',
+                  delay: index * 0.2
+                }
+              }}
+              whileHover={{ 
+                boxShadow: `0 0 30px ${skill.color}60, 0 0 60px ${skill.color}30, 0 0 90px ${skill.color}20`,
+                border: `1px solid ${skill.color}80`
+              }}
+              whileTap={{ scale: 0.95 }}
             >
-              {/* Glowing effect on hover */}
+              {/* Animated border glow */}
               <motion.div
                 style={{
                   position: 'absolute',
                   inset: 0,
-                  background: `linear-gradient(145deg, ${skill.color}20 0%, transparent 100%)`,
-                  opacity: 0,
-                  transition: 'opacity 0.3s ease'
+                  borderRadius: '20px',
+                  padding: '2px',
+                  background: `linear-gradient(45deg, ${skill.color}40, transparent, ${skill.color}40)`,
+                  mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                  maskComposite: 'exclude',
+                  opacity: 0
                 }}
-                whileHover={{ opacity: 1 }}
+                whileHover={{ opacity: 0.6 }}
+                transition={{ duration: 0.3 }}
               />
-              
-              <motion.div 
-                className="skill-icon"
+
+              {/* Tech Logo */}
+              <motion.div
                 style={{
-                  color: skill.color,
                   position: 'relative',
                   zIndex: 1,
                   marginBottom: '1rem'
                 }}
-                initial={{ scale: 0, rotate: -180 }}
-                whileInView={{ scale: 1, rotate: 0 }}
-                transition={{ 
-                  delay: index * 0.1 + 0.3, 
-                  duration: 0.6,
-                  type: "spring",
-                  stiffness: 200
-                }}
-                viewport={{ once: true }}
-                whileHover={{ 
-                  scale: 1.2,
-                  rotate: 5,
-                  filter: `drop-shadow(0 0 20px ${skill.color})`,
-                  transition: { duration: 0.3 }
-                }}
               >
-                {skill.icon}
+                <motion.img
+                  src={skill.logo}
+                  alt={skill.name}
+                  style={{
+                    width: 'clamp(60px, 8vw, 80px)',
+                    height: 'clamp(60px, 8vw, 80px)',
+                    objectFit: 'contain',
+                    filter: 'brightness(0.9)',
+                    transition: 'all 0.3s ease'
+                  }}
+                  whileHover={{
+                    filter: 'brightness(1.2)'
+                  }}
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.nextSibling.style.display = 'block';
+                  }}
+                />
+                <motion.div
+                  style={{
+                    fontSize: 'clamp(2.5rem, 6vw, 3rem)',
+                    display: 'none'
+                  }}
+                >
+                  {skill.icon}
+                </motion.div>
               </motion.div>
               
               <motion.h4
                 style={{
-                  position: 'relative',
-                  zIndex: 1,
-                  color: '#ffffff',
+                  fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
+                  fontWeight: '600',
                   marginBottom: '1rem',
-                  fontSize: '1.2rem',
-                  fontWeight: '600'
+                  color: '#ffffff',
+                  position: 'relative',
+                  zIndex: 1
                 }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 + 0.4, duration: 0.5 }}
-                viewport={{ once: true }}
+                whileHover={{
+                  color: skill.color,
+                  textShadow: `0 0 20px ${skill.color}40`
+                }}
               >
                 {skill.name}
               </motion.h4>
               
-              <div 
-                className="skill-bar"
-                style={{
-                  position: 'relative',
-                  zIndex: 1,
-                  width: '100%',
-                  height: '8px',
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  borderRadius: '10px',
-                  overflow: 'hidden',
-                  marginBottom: '0.5rem'
-                }}
-              >
-                <motion.div
-                  className="skill-progress"
-                  initial={{ width: 0 }}
-                  whileInView={{ width: `${skill.level}%` }}
-                  transition={{ delay: index * 0.1 + 0.6, duration: 1.2, ease: "easeOut" }}
-                  viewport={{ once: true }}
+              <div style={{ position: 'relative', marginBottom: '1rem', zIndex: 1 }}>
+                <div
                   style={{
-                    height: '100%',
-                    background: `linear-gradient(90deg, ${skill.color} 0%, ${skill.color}80 100%)`,
-                    borderRadius: '10px',
-                    boxShadow: `0 0 10px ${skill.color}60`
+                    width: '100%',
+                    height: '8px',
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    borderRadius: '4px',
+                    overflow: 'hidden',
+                    position: 'relative'
                   }}
-                />
+                >
+                  <motion.div
+                    initial={{ width: 0, opacity: 0 }}
+                    animate={isInView ? { 
+                      width: `${skill.level}%`, 
+                      opacity: 1 
+                    } : { 
+                      width: 0, 
+                      opacity: 0 
+                    }}
+                    transition={{ 
+                      delay: 1 + index * 0.1, 
+                      duration: 1.2,
+                      ease: 'easeOut'
+                    }}
+                    style={{
+                      height: '100%',
+                      background: `linear-gradient(90deg, ${skill.color}, ${skill.color}80)`,
+                      borderRadius: '4px',
+                      position: 'relative',
+                      boxShadow: `0 0 10px ${skill.color}40`
+                    }}
+                  >
+                    {/* Animated shine effect */}
+                    <motion.div
+                      style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)',
+                        borderRadius: '4px'
+                      }}
+                      animate={{
+                        x: ['-100%', '100%']
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        delay: 2 + index * 0.1,
+                        ease: 'linear'
+                      }}
+                    />
+                  </motion.div>
+                </div>
               </div>
               
               <motion.span
-                style={{ 
-                  color: 'rgba(255,255,255,0.7)', 
-                  fontSize: '0.9rem',
+                style={{
+                  color: 'rgba(255,255,255,0.7)',
+                  fontSize: 'clamp(0.8rem, 2vw, 0.875rem)',
                   fontWeight: '500',
                   position: 'relative',
                   zIndex: 1
                 }}
                 initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ delay: index * 0.1 + 0.8, duration: 0.5 }}
-                viewport={{ once: true }}
+                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ delay: 1.5 + index * 0.1, duration: 0.5 }}
               >
                 {skill.level}%
               </motion.span>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.8 }}
-          viewport={{ once: true }}
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
           className="text-center"
-          style={{ marginTop: '4rem' }}
         >
-          <div 
-            className="card" 
-            style={{ 
-              maxWidth: '700px', 
+          <motion.div
+            variants={itemVariants}
+            style={{
+              background: 'rgba(255, 255, 255, 0.05)',
+              backdropFilter: 'blur(20px)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              borderRadius: '20px',
+              padding: '2rem',
+              maxWidth: '700px',
               margin: '0 auto',
-              background: 'linear-gradient(145deg, rgba(139, 92, 246, 0.1) 0%, rgba(0, 0, 0, 0.8) 100%)',
-              border: '1px solid rgba(139, 92, 246, 0.3)'
+              position: 'relative',
+              overflow: 'hidden',
+              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)'
             }}
+            whileHover={{
+              background: 'rgba(255, 255, 255, 0.08)',
+              border: '1px solid rgba(139, 92, 246, 0.3)',
+              boxShadow: '0 12px 40px rgba(139, 92, 246, 0.2)',
+              transform: 'translateY(-5px)'
+            }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
           >
-            <motion.h3 
-              style={{ 
+            {/* Animated background gradient */}
+            <motion.div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(6, 182, 212, 0.1), rgba(236, 72, 153, 0.1))',
+                backgroundSize: '400% 400%',
+                borderRadius: '20px',
+                opacity: 0.5
+              }}
+              animate={{
+                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: 'linear'
+              }}
+            />
+
+            <motion.h3
+              variants={itemVariants}
+              style={{
+                fontSize: 'clamp(1.5rem, 3vw, 2rem)',
                 marginBottom: '1.5rem',
-                background: 'linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)',
+                background: 'linear-gradient(135deg, #06b6d4 0%, #8b5cf6 50%, #ec4899 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text'
+                backgroundClip: 'text',
+                fontWeight: '600',
+                position: 'relative',
+                zIndex: 1
               }}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
+              whileHover={{
+                textShadow: '0 0 20px rgba(139, 92, 246, 0.6)'
+              }}
             >
               Currently Learning & Exploring
             </motion.h3>
-            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.75rem' }}>
-              {['CrewAI', 'Knowledge Graphs', 'Advanced LLMs', 'Vector Databases', 'Embeddings', 'RAG Systems'].map((item, index) => (
+            
+            <motion.div
+              variants={itemVariants}
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'center',
+                gap: '1rem',
+                position: 'relative',
+                zIndex: 1
+              }}
+            >
+              {['ChromaDB', 'CrewAI', 'Knowledge Graphs', 'Advanced LLMs', 'Vector Databases', 'LangChain'].map((item, index) => (
                 <motion.span
                   key={item}
-                  initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ delay: index * 0.1, duration: 0.5 }}
-                  viewport={{ once: true }}
-                  whileHover={{ 
-                    scale: 1.1,
-                    backgroundColor: 'rgba(139, 92, 246, 0.3)',
-                    borderColor: '#8b5cf6'
-                  }}
-                  className="tech-tag"
                   style={{
-                    background: 'rgba(255, 255, 255, 0.1)',
-                    border: '1px solid rgba(139, 92, 246, 0.3)',
-                    color: 'rgba(255, 255, 255, 0.9)',
-                    padding: '0.6rem 1rem',
+                    padding: '0.75rem 1.25rem',
+                    background: 'rgba(6, 182, 212, 0.2)',
+                    border: '1px solid rgba(6, 182, 212, 0.3)',
                     borderRadius: '25px',
                     fontSize: '0.9rem',
                     fontWeight: '500',
+                    color: '#e5e7eb',
                     backdropFilter: 'blur(10px)',
-                    transition: 'all 0.3s ease',
-                    cursor: 'default'
+                    position: 'relative',
+                    overflow: 'hidden'
                   }}
+                  initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                  animate={isInView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.8, y: 20 }}
+                  transition={{ delay: 2 + index * 0.1, duration: 0.5 }}
+                  whileHover={{
+                    background: 'rgba(6, 182, 212, 0.3)',
+                    border: '1px solid rgba(6, 182, 212, 0.5)',
+                    boxShadow: '0 4px 20px rgba(6, 182, 212, 0.3)',
+                    y: -2
+                  }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  {item}
+                  {/* Animated shine effect */}
+                  <motion.div
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: '-100%',
+                      width: '100%',
+                      height: '100%',
+                      background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)',
+                      borderRadius: '25px'
+                    }}
+                    animate={{
+                      left: ['100%', '-100%']
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      delay: 3 + index * 0.2,
+                      ease: 'linear'
+                    }}
+                  />
+                  <span style={{ position: 'relative', zIndex: 1 }}>{item}</span>
                 </motion.span>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

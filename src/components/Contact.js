@@ -99,6 +99,14 @@ export default function Contact() {
 
         <motion.div
           className="contact-grid"
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: 'clamp(0.75rem, 2vw, 1rem)',
+            maxWidth: '900px',
+            margin: '0 auto',
+            padding: '0 1rem'
+          }}
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
@@ -111,20 +119,46 @@ export default function Contact() {
               rel={method.href.startsWith('http') ? 'noopener noreferrer' : undefined}
               variants={cardVariants}
               whileHover={{ 
-                y: -15,
-                scale: 1.05,
-                rotateY: 5,
-                transition: { duration: 0.3 }
+                y: -5,
+                scale: 1.02
               }}
-              whileTap={{ scale: 0.95 }}
-              className="card glass-effect animated-border contact-card"
+              whileTap={{ scale: 0.98 }}
+              className="card glass-effect animated-border contact-card cursor-reactive"
               style={{
                 textDecoration: 'none',
                 color: 'inherit',
-                background: 'linear-gradient(145deg, rgba(0, 0, 0, 0.8) 0%, rgba(26, 0, 51, 0.6) 100%)',
+                background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1), rgba(6, 182, 212, 0.1))',
+                backgroundSize: '400% 400%',
+                backdropFilter: 'blur(20px)',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                borderRadius: '16px',
+                padding: 'clamp(0.75rem, 2vw, 1.25rem)',
                 position: 'relative',
                 overflow: 'hidden',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+                transition: 'all 0.3s ease',
+                minHeight: '140px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                textAlign: 'center'
+              }}
+              onMouseMove={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                e.currentTarget.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+                e.currentTarget.style.boxShadow = `0 20px 60px rgba(139, 92, 246, 0.3), 0 8px 32px rgba(0, 0, 0, 0.4)`;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+                e.currentTarget.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.3)';
               }}
             >
               {/* Animated background gradient on hover */}
@@ -177,9 +211,10 @@ export default function Contact() {
 
               {/* Icon with animation */}
               <motion.div
+                className="contact-icon"
                 style={{
-                  fontSize: '4rem',
-                  marginBottom: '1.5rem',
+                  fontSize: '3rem',
+                  marginBottom: '1rem',
                   position: 'relative',
                   zIndex: 1,
                   textAlign: 'center'
@@ -211,9 +246,9 @@ export default function Contact() {
               >
                 <motion.h3
                   style={{
-                    fontSize: '1.75rem',
+                    fontSize: '1.5rem',
                     fontWeight: '700',
-                    marginBottom: '0.5rem',
+                    marginBottom: '0.375rem',
                     background: method.gradient,
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
@@ -228,10 +263,10 @@ export default function Contact() {
 
                 <motion.p
                   style={{
-                    fontSize: '1rem',
+                    fontSize: '0.875rem',
                     color: 'rgba(255, 255, 255, 0.7)',
-                    marginBottom: '1rem',
-                    lineHeight: '1.5'
+                    marginBottom: '0.75rem',
+                    lineHeight: '1.4'
                   }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -241,16 +276,17 @@ export default function Contact() {
                 </motion.p>
 
                 <motion.div
+                  className="contact-button"
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '0.5rem',
-                    padding: '0.75rem 1.5rem',
+                    gap: '0.375rem',
+                    padding: '0.5rem 1rem',
                     background: method.gradient,
-                    borderRadius: '30px',
+                    borderRadius: '25px',
                     color: '#ffffff',
                     fontWeight: '600',
-                    fontSize: '1rem'
+                    fontSize: '0.875rem'
                   }}
                   initial={{ opacity: 0, scale: 0 }}
                   animate={{ opacity: 1, scale: 1 }}

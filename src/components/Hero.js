@@ -67,16 +67,49 @@ export default function Hero() {
 
   return (
     <section id="home" className="hero">
+      {/* Floating background elements */}
+      <div className="floating-particles" />
+      
       <div className="container">
         <motion.div 
-          className="hero-content"
+          className="hero-content glass-effect-strong animated-border"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
+          {/* Animated background particles */}
+          {[...Array(12)].map((_, i) => (
+            <motion.div
+              key={i}
+              style={{
+                position: 'absolute',
+                width: '6px',
+                height: '6px',
+                background: `linear-gradient(45deg, ${i % 2 === 0 ? '#8b5cf6' : '#ec4899'}, ${i % 2 === 0 ? '#ec4899' : '#06b6d4'})`,
+                borderRadius: '50%',
+                left: `${10 + (i * 8)}%`,
+                top: `${20 + (i % 3) * 20}%`,
+                zIndex: 0
+              }}
+              animate={{
+                y: [-20, 20, -20],
+                x: [-10, 10, -10],
+                opacity: [0.3, 1, 0.3],
+                scale: [0.5, 1.2, 0.5]
+              }}
+              transition={{
+                duration: 4 + i * 0.5,
+                repeat: Infinity,
+                ease: 'easeInOut',
+                delay: i * 0.2
+              }}
+            />
+          ))}
+
           <motion.h1 
             variants={titleVariants}
-            className="hero-title"
+            className="hero-title text-glow"
+            style={{ position: 'relative', zIndex: 1 }}
           >
             <motion.span
               initial={{ opacity: 0, rotateX: -90 }}
