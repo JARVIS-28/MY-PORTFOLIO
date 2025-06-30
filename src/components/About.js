@@ -63,12 +63,7 @@ export default function About() {
           </motion.p>
         </motion.div>
 
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '3rem',
-          alignItems: 'center'
-        }}>
+        <div className="about-grid">
           {/* Profile Image */}
           <motion.div
             variants={imageVariants}
@@ -80,7 +75,7 @@ export default function About() {
             }}
           >
             <motion.div
-              className="glass-effect animated-border"
+              className="glass-effect animated-border profile-image"
               style={{
                 width: '300px',
                 height: '300px',

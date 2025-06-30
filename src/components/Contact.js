@@ -54,7 +54,7 @@ export default function Contact() {
       icon: '💼',
       label: 'LinkedIn',
       value: 'Connect with me',
-      href: 'https://linkedin.com/in/janvii-r-v',
+      href: 'https://www.linkedin.com/in/janvii-rv-6775b824b',
       gradient: 'linear-gradient(135deg, #ec4899 0%, #f97316 100%)',
       description: 'Let\'s network professionally'
     },
@@ -98,13 +98,7 @@ export default function Contact() {
         </motion.div>
 
         <motion.div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '2rem',
-            maxWidth: '1000px',
-            margin: '0 auto'
-          }}
+          className="contact-grid"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
@@ -123,7 +117,7 @@ export default function Contact() {
                 transition: { duration: 0.3 }
               }}
               whileTap={{ scale: 0.95 }}
-              className="card glass-effect animated-border"
+              className="card glass-effect animated-border contact-card"
               style={{
                 textDecoration: 'none',
                 color: 'inherit',
