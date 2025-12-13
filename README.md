@@ -122,7 +122,7 @@ Adjust Framer Motion variants in individual components to customize animations.
 
 ## 📧 Contact
 
-- **Email**: janviirv777@gmail.com
+- **Email**: janviirv@gmail.com
 - **GitHub**: [JARVIS-28](https://github.com/JARVIS-28)
 - **LinkedIn**: [Janvii R V](https://linkedin.com/in/janvii-rv)
 - **Portfolio**: [https://my-portfolio-8ep5o7sgd-janvii-rvs-projects.vercel.app](https://my-portfolio-8ep5o7sgd-janvii-rvs-projects.vercel.app)
