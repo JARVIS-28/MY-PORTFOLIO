@@ -83,9 +83,7 @@ npm run build
 3. Upload the contents of the `out` folder to your hosting provider.
 
 ### Current Live URLs
-- **Production**: https://my-portfolio-8ep5o7sgd-janvii-rvs-projects.vercel.app
-- **Preview**: https://my-portfolio-e2g8yqub7-janvii-rvs-projects.vercel.app
-- **Previous**: https://my-portfolio-5wjuxtsuk-janvii-rvs-projects.vercel.app
+ There is no URL currently. Checkout Portfolio 2.0 for the new portfolio.
 
 ## 📁 Project Structure
 
