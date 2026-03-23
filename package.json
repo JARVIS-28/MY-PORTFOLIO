@@ -12,7 +12,7 @@
     "@react-three/fiber": "^9.1.2",
     "framer-motion": "^12.19.2",
     "lucide-react": "^0.525.0",
-    "next": "latest",
+    "next": "15.5.8",
     "react": "latest",
     "react-dom": "latest",
     "three": "^0.177.0"
